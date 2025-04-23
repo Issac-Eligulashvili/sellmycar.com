@@ -1,0 +1,80 @@
+:root {
+     --blue: #8ECAE6;
+     --subtext1: #5B5B5B;
+}
+
+@font-face {
+     font-family: "Tex";
+     src: url('/fonts/tex.otf');
+}
+
+html,body {
+     height: 100%;
+}
+
+.mainGrid {
+     display: grid;
+     grid-template-rows: 72px 1fr 72px;
+     height: 100%;
+}
+
+.header {
+     margin-bottom: 40px;
+     font-family: "Tex";
+}
+
+.locationButton{
+     width: 100%;
+     background-color: var(--blue);
+     border-radius: 20px;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     height: 72px;
+     border: 2px solid var(--blue);
+}
+
+#registerForm > input {
+     height: 72px;
+     font-family: "Tex";
+     color: black;
+     border-radius: 20px;
+     width: 100%;
+     margin-bottom: 40px;
+     border: 2px solid rgba(0, 0, 0, 0.4);
+     padding-left: 20px;
+}
+
+#registerForm > button {
+     height: 72px;
+     font-family: "Tex";
+     font-size: 24px;
+     color: black;
+     border-radius: 20px;
+     width: 100%;
+     border: none;
+     background: var(--blue);
+}
+
+.zipInput {
+     height: 72px;
+     font-family: "Tex";
+     color: black;
+     border-radius: 20px;
+     width: 100%;
+     margin-bottom: 40px;
+     border: 2px solid rgba(0, 0, 0, 0.4);
+     padding-left: 20px;
+}
+
+.orText {
+     width: fit-content;
+     left: 50%;
+     transform: translateX(-50%);
+     top: 24px;
+     font-family: "Tex";
+     font-size: 15px;
+     padding: 0;
+     margin: 0;
+     color: var(--subtext1);
+}

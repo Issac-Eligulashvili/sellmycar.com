@@ -34,6 +34,18 @@ app.post('/login', async(req,res) => {
 })
 
 app.post('/register/dealership', async(req, res) => {
+     await register(res, req, true);
+})
+
+app.post('/register', async(req, res) => {
+     await register(res, req, false);
+})
+
+app.post('/', async(req, res) => {
+     res.status(200).json({message: "Hello!"})
+})
+
+async function register(res, req, isDealer) {
      let {
           email, 
           password, 
@@ -44,6 +56,7 @@ app.post('/register/dealership', async(req, res) => {
      } = req.body;
 
      try {
+          // If there is a ZIP get the coordinates
           if (zip_code) {
                const response = await fetch(` https://nominatim.openstreetmap.org/search?postalcode=${zip_code}&country=us&format=json`);
                const data = response.json();
@@ -55,7 +68,7 @@ app.post('/register/dealership', async(req, res) => {
                     throw new Error("Location not found");
                }
           }
-     
+          // get country+state from the lon and lat
           async function getStateAndCountry() {
                const response = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitutde}&format=json`);
                const data = response.json();
@@ -78,7 +91,7 @@ app.post('/register/dealership', async(req, res) => {
                password: password,
                options: {
                     data: {
-                         isDealer: true,
+                         isDealer: isDealer,
                     }
                }
           })
@@ -87,10 +100,10 @@ app.post('/register/dealership', async(req, res) => {
                return res.status(500).json({error: error.message});
           }
      
-          await supabase.from('profiles').insert({
+          const {error: ProfileError} = await supabase.from('profiles').insert({
                id: data.user.id,
                username: username,
-               isDealer: true,
+               isDealer: isDealer,
                latitude: latitude,
                longitude: longitude,
                city: city,
@@ -98,23 +111,20 @@ app.post('/register/dealership', async(req, res) => {
                state: state,
                zip_code: zip_code ? zip_code : null,
           })
+
+          if (ProfileError) {
+               return res.status(500).json({error: ProfileError.message})
+          }
+
+          res.status(200).json({ message: 'Registration successful', userId: data.user.id });
      } catch(error) {
           res.status(500).json({error: "Internal Server Error"});
      }    
-})
-
-app.post('/register', async(req, res) => {
-     
-})
+}
 
 // Middleware to handle CORS and JSON parsing
 app.use(cors());
 app.use(express.json());
-
-// Basic route
-app.get('/', (req, res) => {
-     res.send('Hello from the backend!');
-});
 
 // Start server on PORT defined in .env file
 const PORT = process.env.PORT || 5000;

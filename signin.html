@@ -25,7 +25,65 @@
     <header>
       <!-- place navbar here -->
     </header>
-    <main></main>
+    <main class="mainGrid">
+      <div class="nav"></div>
+      <div
+        class="container d-flex align-items-center justify-content-center flex-column"
+      >
+        <h1 class="header">Sign up to list your car now!</h1>
+        <div class="row w-100 justify-content-center">
+          <form
+            class="col-8 col-md-6 d-flex flex-column align-items-center"
+            id="registerForm"
+          >
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              id="email"
+              required
+            />
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              id="password"
+              required
+            />
+            <input
+              type="text"
+              name="username"
+              placeholder="Username"
+              id="username"
+              required
+            />
+            <div class="row w-100 p-0 gx-4 position-relative">
+              <p class="position-absolute orText">OR</p>
+              <div class="col-12 col-md-6 ps-0" style="margin-bottom: 40px">
+                <button
+                  type="button"
+                  class="locationButton"
+                  id="getLocationButton"
+                >
+                  <img src="img/my_location_icon.svg" />
+                </button>
+              </div>
+              <div class="col-12 col-md-6 pe-0">
+                <input
+                  type="text"
+                  name="zip"
+                  class="zipInput"
+                  placeholder="Zip Code"
+                  id="zip"
+                />
+              </div>
+            </div>
+            <button type="submit">SIGN UP</button>
+          </form>
+        </div>
+      </div>
+      <div class="footer"></div>
+    </main>
     <footer>
       <!-- place footer here -->
     </footer>
@@ -42,7 +100,12 @@
       crossorigin="anonymous"
     ></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.js"
+      integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+      crossorigin="anonymous"
+    ></script>
+
     <script src="js/Signin.js"></script>
   </body>
 </html>
