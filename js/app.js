@@ -33,6 +33,76 @@ app.post('/login', async(req,res) => {
      }
 })
 
+app.post('/register/dealership', async(req, res) => {
+     let {
+          email, 
+          password, 
+          username, 
+          longitude, 
+          latitude, 
+          zip_code 
+     } = req.body;
+
+     try {
+          if (zip_code) {
+               const response = await fetch(` https://nominatim.openstreetmap.org/search?postalcode=${zip_code}&country=us&format=json`);
+               const data = response.json();
+               if (data && data.length > 0) {
+                    const location = data[0];
+                    longitude = parseFloat(location.lon);
+                    latitude = parseFloat(location.lat);
+               } else {
+                    throw new Error("Location not found");
+               }
+          }
+     
+          async function getStateAndCountry() {
+               const response = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitutde}&format=json`);
+               const data = response.json();
+     
+               const city = data.address.city || data.address.town || data.address.village;
+               const country = data.address.country;
+               const state = data.address.state;
+     
+               return {
+                    city: city,
+                    state: state,
+                    country: country
+               }
+          }
+     
+          const {city, state, country} = getStateAndCountry();
+     
+          const {data, error} = supabase.auth.signUp({
+               email: email, 
+               password: password,
+               options: {
+                    data: {
+                         isDealer: true,
+                    }
+               }
+          })
+
+          if (error) {
+               return res.status(500).json({error: error.message});
+          }
+     
+          await supabase.from('profiles').insert({
+               id: data.user.id,
+               username: username,
+               isDealer: true,
+               latitude: latitude,
+               longitude: longitude,
+               city: city,
+               country: country,
+               state: state,
+               zip_code: zip_code ? zip_code : null,
+          })
+     } catch(error) {
+          res.status(500).json({error: "Internal Server Error"});
+     }    
+})
+
 app.post('/register', async(req, res) => {
      
 })
