@@ -78,3 +78,15 @@ html,body {
      margin: 0;
      color: var(--subtext1);
 }
+
+.orText2 {
+     width: fit-content;
+     left: 50%;
+     transform: translateX(-50%);
+     top: 80px;
+     font-family: "Tex";
+     font-size: 15px;
+     padding: 0;
+     margin: 0;
+     color: var(--subtext1);
+}

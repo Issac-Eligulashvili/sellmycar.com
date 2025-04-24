@@ -58,8 +58,12 @@
               required
             />
             <div class="row w-100 p-0 gx-4 position-relative">
-              <p class="position-absolute orText">OR</p>
-              <div class="col-12 col-md-6 ps-0" style="margin-bottom: 40px">
+              <p class="position-absolute orText d-none d-md-block">OR</p>
+              <p class="position-absolute orText2 d-block d-md-none">OR</p>
+              <div
+                class="col-12 col-md-6 p-0 pe-md-3 ps-md-0"
+                style="margin-bottom: 40px"
+              >
                 <button
                   type="button"
                   class="locationButton"
@@ -68,7 +72,7 @@
                   <img src="img/my_location_icon.svg" />
                 </button>
               </div>
-              <div class="col-12 col-md-6 pe-0">
+              <div class="col-12 col-md-6 p-0 ps-md-3 pe-md-0">
                 <input
                   type="text"
                   name="zip"
@@ -78,7 +82,7 @@
                 />
               </div>
             </div>
-            <button type="submit">SIGN UP</button>
+            <button type="submit" id="submit">SIGN UP</button>
           </form>
         </div>
       </div>

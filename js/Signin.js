@@ -1,8 +1,7 @@
-
+let coords = {longitude: null, latitude: null};
 
 // getting the users location based on button press
 $('#getLocationButton').on("click", ()=> {
-     let coords = {longitude: null, latitide: null};
      if (!navigator.geolocation) {
           alert("Geolocation is not supported by your browser!");
           return;
@@ -10,8 +9,8 @@ $('#getLocationButton').on("click", ()=> {
 
      navigator.geolocation.getCurrentPosition(
           (position)=> {
-               coords = position.coords;
-               console.log(coords);
+               coords.latitude = position.coords.latitude;
+               coords.longitude = position.coords.longitude;
           },
           (error) => {
                switch (error.code) {
@@ -21,11 +20,34 @@ $('#getLocationButton').on("click", ()=> {
                     case error.TIMEOUT:
                       alert('The request to get user location timed out.');
                       break;
-                    default:
-                      alert('An unknown error occurred.');
-                      break;
                }
           }
      )
-     
+});
+
+$('#submit').on("click", function(e) {
+     e.preventDefault();
+
+     let user = {};
+     user.email = $("#email").val();
+     user.password = $("#password").val();
+     user.username = $("#username").val();
+     if (coords.longitude && coords.latitude) {
+          user.longitude = coords.longitude;
+          user.latitude = coords.latitude;
+     }
+     if ($("#zip").val().length == 5 ) {
+          user.zip_code = $("#zip").val();
+     }
+     $.ajax({
+          type: "POST",
+          url: "https://sell-my-car-backend.onrender.com/register",
+          data: JSON.stringify(user),
+          headers: {
+               'Content-Type': 'application/json'
+          },
+          success: function (response) {
+               console.log('Response:', response);   
+          }
+     });
 })
