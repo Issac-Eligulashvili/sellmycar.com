@@ -41,13 +41,17 @@ $('#submit').on("click", function(e) {
      }
      $.ajax({
           type: "POST",
-          url: "https://sell-my-car-backend.onrender.com/register",
+          url: "http://localhost:3000/register",
           data: JSON.stringify(user),
           headers: {
-               'Content-Type': 'application/json'
+               'Content-Type': 'application/json',
+               
+          },
+          xhrFields: {
+               withCredentials: true,
           },
           success: function (response) {
-               console.log('Response:', response);   
+               // window.location.href="/login.html"; 
           }
      });
 })
