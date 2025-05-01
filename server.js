@@ -42,7 +42,11 @@ app.post('/login', async(req,res) => {
                maxAge:1000 * 60 * 60 * 24 * 7
           })
 
-          res.cookie("")
+          res.cookie("id", data.user.id, {
+               httpOnly: true,
+               sameSite: "Lax",
+               maxAge:1000 * 60 * 60 * 24 * 7 
+          })
 
           res.status(200).json({
                message: 'Login successful',
