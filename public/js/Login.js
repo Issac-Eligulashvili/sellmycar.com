@@ -17,7 +17,8 @@ $('#submit').on("click", function(e) {
                withCredentials: true,
           },
           success: function (response) {
-               console.log(response);
+              sessionStorage.setItem("userID", response.user.id);
+              window.location.href ="/index.html  "
           }
      });
 })

@@ -42,12 +42,6 @@ app.post('/login', async(req,res) => {
                maxAge:1000 * 60 * 60 * 24 * 7
           })
 
-          res.cookie("id", data.user.id, {
-               httpOnly: true,
-               sameSite: "Lax",
-               maxAge:1000 * 60 * 60 * 24 * 7 
-          })
-
           res.status(200).json({
                message: 'Login successful',
                user: data.user,     // Contains user data (e.g., email, id, etc.)
@@ -56,6 +50,15 @@ app.post('/login', async(req,res) => {
      } catch(error) {
           res.status(500).json({error: "Internal Server Error"});
      }
+})
+
+app.get('/auth/status', async(req, res) => {
+     const token = req.cookies;
+     if (!token["sb-refresh-token"]) {
+          return res.status(401).json({isLoggedIn: false, reason: "No refresh token"})
+          
+     }
+     
 })
 
 app.post('/register/dealership', async(req, res) => {
