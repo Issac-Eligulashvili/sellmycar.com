@@ -1,5 +1,4 @@
-
-$('#submit').on("click", function(e) {
+function login(e) {
      e.preventDefault();
 
      let user = {};
@@ -19,6 +18,17 @@ $('#submit').on("click", function(e) {
           success: function (response) {
               sessionStorage.setItem("userID", response.user.id);
               window.location.href ="/index.html  "
+          },
+          error: function(error) {
+               
           }
-     });
-})
+     })
+}
+
+$('#submit').on("click", (e) => login(e));
+
+$(document).on("keydown", function(e) {
+     if (e.key === "Enter") {
+          login(e);
+     }
+});

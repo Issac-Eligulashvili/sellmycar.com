@@ -1,6 +1,6 @@
 $.ajax({
      type: "GET",
-     url: "/auth/status",
+     url: "/user/data",
      headers: {
           'Content-Type': 'application/json',
           
