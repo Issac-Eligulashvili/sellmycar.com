@@ -26,16 +26,20 @@
     <link rel="stylesheet" href="style.css" />
   </head>
 
-  <body class="index">
-    <header>
-      <!-- place navbar here -->
-    </header>
-    <main>
-      <h1>INDEX</h1>
-    </main>
-    <footer>
-      <!-- place footer here -->
-    </footer>
+  <body id="app">
+    <div v-if="isLoading">
+      <p>Loading..</p>
+    </div>
+    <div v-else class="mainGrid">
+      <header class="Nav">
+        <p class="stateBox">{{formatState(data.state)}}</p>
+        <p class="navText m-0">Hi {{data.username}}!</p>
+      </header>
+      <main></main>
+      <footer>
+        <!-- place footer here -->
+      </footer>
+    </div>
     <!-- Bootstrap JavaScript Libraries -->
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
@@ -58,6 +62,6 @@
       crossorigin="anonymous"
     ></script>
     <!-- My JS -->
-    <script src="js/index.js"></script>
+    <script src="js/userMain.js"></script>
   </body>
 </html>
