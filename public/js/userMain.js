@@ -7,6 +7,7 @@ const app = Vue.createApp({
           return {
                data: {},
                isLoading: true,
+               listings: []
           }
      },
      methods: {
@@ -86,14 +87,40 @@ const app = Vue.createApp({
                     "Wyoming": "WY"
                };
                return states[state];
+          },
+          getListings() {
+               $.ajax({
+                    type: "GET",
+                    url: "/user/listings",
+                    headers: {
+                         'Content-Type': 'application/json',
+                         
+                    },
+                    xhrFields: {
+                         withCredentials: true,
+                    },
+                    success: (response) => {
+                         this.listings = response.data;
+                         this.isLoading = false;
+                    },
+                    error: function (xhr, status, error) {
+                         if(xhr.status === 401) {
+                              window.location.href='/login.html'
+                         }
+                    }
+               });
           }
      },
      mounted() {
           this.getData();
+          this.getListings();
      },
      watch: {
           data(newData) {
                console.log(newData);
+          },
+          listings(newListings) {
+               console.log(newListings)
           }
      }     
 }).mount("#app");

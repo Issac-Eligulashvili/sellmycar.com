@@ -11,6 +11,7 @@ $(document).ready(function () {
           },
           success: function (response) {
                const data = response.data;
+               console.log(data);
                if (data.isDealer) {
                     window.location.href = "/dealer.html"
                } else {

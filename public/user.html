@@ -35,8 +35,19 @@
         <p class="stateBox">{{formatState(data.state)}}</p>
         <p class="navText m-0">Hi {{data.username}}!</p>
       </header>
-      <main></main>
-      <footer>
+      <main>
+        <!-- Listings Section -->
+        <div class="row justify-content-center">
+          <div class="col-10">
+            <h1 class="header m-0 mb-2">Your Listings</h1>
+            <div v-if="listings.length == 0">
+              <h2>You currently have no listings!</h2>
+              <h3>Click the button above to list your first car!</h3>
+            </div>
+          </div>
+        </div>
+      </main>
+      <footer class="Footer">
         <!-- place footer here -->
       </footer>
     </div>

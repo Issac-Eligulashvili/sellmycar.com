@@ -69,6 +69,19 @@ app.get('/user/data',authMiddleware, async (req, res) => {
      }
 })
 
+app.get('/user/listings', authMiddleware, async(req, res) => {
+     const id = req.user.id;
+     try {
+          const {data, error} = await supabaseService.from("listings").select("*").eq("owners_id", id);
+          if (error) {
+               return res.status.json({message: "error fetching data"}, error);
+          }
+          return res.status(200).json({data: data});
+     } catch (err) {
+          return res.status(500).json({message: "Server error"}, err);
+     }
+})
+
 app.post('/register/dealership', async(req, res) => {
      await register(res, req, true);
 })

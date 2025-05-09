@@ -118,3 +118,6 @@ body.index {
 .navText {
      font-family: "Tex";
 }
+.Footer {
+     border-top: solid 1px var(--light-grey);
+}
