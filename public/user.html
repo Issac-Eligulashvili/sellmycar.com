@@ -41,8 +41,17 @@
           <div class="col-10">
             <h1 class="header m-0 mb-2">Your Listings</h1>
             <div v-if="listings.length == 0">
-              <h2>You currently have no listings!</h2>
-              <h3>Click the button above to list your first car!</h3>
+              <div class="row justify-content-center">
+                <div
+                  class="col-8 d-flex justify-content-center flex-column align-items-center"
+                >
+                  <img class="carImg" src="img/broken_down_car_edge.svg" />
+                  <h2 class="subText">You currently have no listings!</h2>
+                  <h5 class="subText">
+                    Click the button above to list your first car!
+                  </h5>
+                </div>
+              </div>
             </div>
           </div>
         </div>
