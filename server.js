@@ -23,8 +23,6 @@ app.post('/login', async(req,res) => {
                email: email,
                password: password,
           });
-          console.log(error);
-          console.log(data);
           if (error) {
                return res.status(400).json({error: error.message});
           }
@@ -53,6 +51,7 @@ app.post('/login', async(req,res) => {
 
 app.get('/user/data',authMiddleware, async (req, res) => {
      const id = req.user.id;
+     console.log(id);
      try {
           const {data, error} = await supabaseService.
           from("profiles").
@@ -95,7 +94,6 @@ app.post('/', async(req, res) => {
 })
 
 async function register(res, req, isDealer) {
-     console.log('Request body:', req.body);
      let {
           email, 
           password, 
@@ -148,7 +146,7 @@ async function register(res, req, isDealer) {
                }
           })
 
-          console.log(data);
+          
 
           if (data.session) {
 
