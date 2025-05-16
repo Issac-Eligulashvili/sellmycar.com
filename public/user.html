@@ -16,6 +16,12 @@
       integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
       crossorigin="anonymous"
     />
+
+    <!-- Icons -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=lock"
+    />
     <!-- Vue CDNs -->
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="https://unpkg.com/vue-router@4.5.1/dist/vue-router.global.js"></script>
@@ -39,11 +45,30 @@
         <!-- Listings Section -->
         <div class="row justify-content-center">
           <div class="col-10">
-            <h1 class="header m-0 mb-2">Trusted, Secure Transactions</h1>
-            <h1 class="header m-0 mb-2">Fast and Hassle-Free Process</h1>
-            <h1 class="header m-0 mb-2">
-              Better Offers Through Dealer Competition
-            </h1>
+            <div class="row mt-5">
+              <div class="col-12 col-md-4">
+                <div class="titleCard">
+                  <h1 class="header m-0 mb-2 text-center">
+                    Trusted, Secure Transactions
+                  </h1>
+                  <span class="material-symbols-outlined icon"> lock </span>
+                </div>
+              </div>
+              <div class="col-12 col-md-4">
+                <div class="titleCard">
+                  <h1 class="header m-0 mb-2 text-center">
+                    Fast and Hassle-Free Process
+                  </h1>
+                </div>
+              </div>
+              <div class="col-12 col-md-4">
+                <div class="titleCard">
+                  <h1 class="header m-0 mb-2 text-center">
+                    Better Offers Through Dealer Competition
+                  </h1>
+                </div>
+              </div>
+            </div>
             <h1 class="header m-0 mb-2">Your Listings</h1>
             <div v-if="listings.length == 0">
               <div class="row justify-content-center">

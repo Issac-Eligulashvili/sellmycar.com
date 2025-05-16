@@ -132,3 +132,13 @@ body.index {
      font-family: "Tex";
      color: var(--subtext2);
 }
+
+.titleCard {
+     border: solid 1px var(--light-grey);
+     height: 100%;
+     border-radius: 10px;
+}
+
+.icon {
+     font-size: 70%;
+}
