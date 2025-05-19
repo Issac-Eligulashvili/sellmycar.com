@@ -109,6 +109,14 @@ const app = Vue.createApp({
                          }
                     }
                });
+          },
+          redirect(page, data) {
+               let ending = "";
+               if (data) {
+                    const encodedData = encodeURIComponent(btoa(JSON.stringify(this.data)));
+                    sessionStorage.setItem("user_data", encodedData)
+               }   
+               window.location.href=`/${page}.html`
           }
      },
      mounted() {

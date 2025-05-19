@@ -57,7 +57,7 @@ app.get('/user/data',authMiddleware, async (req, res) => {
           from("profiles").
           select("*").
           eq("id", id);
-          console.log(data);
+          console.log(data[0]);
           if (error) {
                return res.status(500).json({message: "error fetching data"}, error);
           }

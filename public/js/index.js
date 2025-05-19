@@ -22,6 +22,7 @@ $(document).ready(function () {
                if(xhr.status === 401) {
                     window.location.href='/login.html'
                }
+               
           }
      });
 });

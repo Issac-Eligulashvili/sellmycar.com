@@ -3,6 +3,7 @@
      --subtext1: #5B5B5B;
      --light-grey: #D9D9D9;
      --subtext2: rgba(0, 0, 0, 0.5);
+     --lightest-grey: #efefef;
 }
 
 @font-face {
@@ -134,11 +135,67 @@ body.index {
 }
 
 .titleCard {
-     border: solid 1px var(--light-grey);
+     border: solid 3px var(--blue);
      height: 100%;
      border-radius: 10px;
+     padding: 10px 20px;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     flex-direction: column;
+}
+
+.titleCard > p, .form > p {
+     font-family: "paralucent", sans-serif;
+font-weight: 400;
+font-style: normal;
+font-size: 14px;
+}
+
+.titleCard > img {
+     width: 48px;
+     padding: 10px;
+     background: var(--blue);
+     border-radius: 5px;
 }
 
 .icon {
      font-size: 70%;
+}
+
+.listBtn {
+     border: var(--blue) 3px solid;
+     background: none;
+     border-radius: 10px;
+     font-family: "tex";
+     transition: all 0.2s;
+}
+
+.listBtn:hover {
+     background: var(--blue);
+}
+
+.form {
+     height: calc(100% - 32px);
+     aspect-ratio: 1;
+     width: fit-content;
+     margin: auto;
+     background-color: var(--lightest-grey);
+     border-radius: 20px;
+     padding: 0% 60px;
+}
+
+.form >hr {
+     border-color: var(--blue);
+     height: 3px;
+     color: var(--blue);
+     background-color: var(--blue);
+     opacity: 1;
+     width: 100%;
+     align-self: center;
+     margin: 5px 0 0 0 ;
+}
+
+.form img:hover {
+     cursor: pointer;
 }

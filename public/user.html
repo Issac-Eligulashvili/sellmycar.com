@@ -22,6 +22,10 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=lock"
     />
+
+    <!-- fonts -->
+    <link rel="stylesheet" href="https://use.typekit.net/bec1rwq.css" />
+
     <!-- Vue CDNs -->
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="https://unpkg.com/vue-router@4.5.1/dist/vue-router.global.js"></script>
@@ -43,33 +47,56 @@
       </header>
       <main>
         <!-- Listings Section -->
-        <div class="row justify-content-center">
-          <div class="col-10">
-            <div class="row mt-5">
+        <div class="row justify-content-center m-0">
+          <div class="col-10 d-flex flex-column">
+            <div class="row mt-5 gy-3">
               <div class="col-12 col-md-4">
                 <div class="titleCard">
-                  <h1 class="header m-0 mb-2 text-center">
-                    Trusted, Secure Transactions
-                  </h1>
-                  <span class="material-symbols-outlined icon"> lock </span>
+                  <img src="img/handshake.svg" class="mt-3" />
+                  <h5 class="header m-0 my-3 text-center">
+                    Personalized Offers from Real Dealers
+                  </h5>
+                  <p class="text-center">
+                    Instead of automated estimates, users get real, personalized
+                    offers from vetted dealerships actively looking to buy —
+                    ensuring more accurate pricing and serious interest.
+                  </p>
                 </div>
               </div>
               <div class="col-12 col-md-4">
                 <div class="titleCard">
-                  <h1 class="header m-0 mb-2 text-center">
+                  <img src="img/speed.svg" class="mt-3" />
+                  <h5 class="header m-0 my-3 text-center">
                     Fast and Hassle-Free Process
-                  </h1>
+                  </h5>
+                  <p class="text-center">
+                    Create a simple listing in minutes and get connected with
+                    real dealerships—no endless forms or negotiating, just quick
+                    interest from serious buyers.
+                  </p>
                 </div>
               </div>
               <div class="col-12 col-md-4">
                 <div class="titleCard">
-                  <h1 class="header m-0 mb-2 text-center">
+                  <img src="img/deal.svg" class="mt-3" />
+                  <h5 class="header m-0 my-3 text-center">
                     Better Offers Through Dealer Competition
-                  </h1>
+                  </h5>
+                  <p class="text-center">
+                    Multiple dealerships compete for your car, driving up the
+                    price and ensuring you get the strongest possible offer—no
+                    need to shop around yourself.
+                  </p>
                 </div>
               </div>
             </div>
-            <h1 class="header m-0 mb-2">Your Listings</h1>
+            <button
+              class="listBtn p-3 mt-3 mx-auto w-auto"
+              @click="redirect('listing', true)"
+            >
+              List My Car Now!
+            </button>
+            <h1 class="header m-0 my-2">Your Listings</h1>
             <div v-if="listings.length == 0">
               <div class="row justify-content-center">
                 <div
