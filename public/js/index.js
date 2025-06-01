@@ -10,6 +10,7 @@ $(document).ready(function () {
                withCredentials: true,
           },
           success: function (response) {
+               console.log(response);
                const data = response.data;
                console.log(data);
                if (data.isDealer) {

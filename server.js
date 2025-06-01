@@ -26,7 +26,7 @@ app.post('/login', async(req,res) => {
           if (error) {
                return res.status(400).json({error: error.message});
           }
-
+          
           res.cookie("sb-access-token", data.session.access_token, {
                httpOnly: true,
                sameSite: "Lax",

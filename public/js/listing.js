@@ -3,6 +3,27 @@ const app = Vue.createApp({
           return {
                data: {},
                step: 1,
+               formData:{
+                    make: '',
+                    model: '',
+                    number: '',
+                    owner_email: '',
+                    trim: '',
+                    year: null,
+                    vin: '',
+                    miles: null,
+                    ext_color: '',
+                    ext_condition: '',
+                    int_color: '',
+                    ovr_condition: '',
+                    inAccident: null,
+                    ownership: '',
+                    payoff: '',
+                    bank: '',
+                    months: null,
+                    additional_info: '',
+                    owner_name:'',
+               },
           }
      },
      methods: {

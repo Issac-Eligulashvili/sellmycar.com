@@ -19,8 +19,8 @@ function login(e) {
               sessionStorage.setItem("userID", response.user.id);
               window.location.href ="/index.html  "
           },
-          error: function(error) {
-               
+          error: function(xhr,status,error) {
+               console.log(xhr);
           }
      })
 }
