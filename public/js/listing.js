@@ -89,7 +89,7 @@ const app = Vue.createApp({
                .replace(/_/g, ' ')
                .replace(/\b\w/g, l => l.toUpperCase());
           },
-          getInputType(value) {
+          getInputType(value, key) {
                if (typeof value === 'number') return 'number';
                if (typeof value === 'boolean') return 'checkbox';
                if (key === 'owner_email') return 'email';

@@ -42,57 +42,53 @@
         <p class="stateBox">{{formatState(data.state)}}</p>
         <p class="navText m-0">Hi {{data.username}}!</p>
       </header>
-      <main id="form" class="form d-flex flex-column">
-        <p class="text-center mb-0 mt-2">Step {{currentStep}} of 3</p>
       <main id="form" class="form d-flex flex-column overflow-auto">
-        <p class="text-center mb-0 mt-2">Step {{step}} of 3</p>
-        <hr />
+        <p class="text-center mb-0 mt-2">Step {{currentStep}} of 3</p>
         <div class="d-flex justify-content-between align-items-center" v-if="currentStep === 1">
           <div style="width: 32px"></div>
           <h3 class="header text-center m-0">Information Form</h3>
           <img style="width: 32px; padding: 4px" src="img/arrow_right.svg" />
-          <form @submit.prevent="submitForm">
-            <div v-for="(value, key) in formData" :key="key" class="form-group">
-      <label :for="key">{{ formatLabel(key) }}</label>
+        </div>
+        <form class="pb-3">
+          <div v-for="(value, key) in formData" :key="key" class="form-group mt-3">
+    <!-- Input type logic -->
+    <input
+      v-if="!isTextArea(key) && !isSelect(key)"
+      :type="getInputType(value, key)"
+      class="form-control"
+      :id="key"
+      v-model="formData[key]"
+      :placeholder="formatLabel(key)"
+    />
 
-      <!-- Input type logic -->
-      <input
-        v-if="!isTextArea(key) && !isSelect(key)"
-        :type="getInputType(value)"
-        class="form-control"
-        :id="key"
-        v-model="formData[key]"
-        :placeholder="formatLabel(key)"
-      />
+            <!-- ─── TEXTAREA ─── -->
+            <textarea
+              v-else-if="isTextArea(key)"
+              class="form-control"
+              :id="key"
+              v-model="formData[key]"
+              :placeholder="formatLabel(key)"
+            ></textarea>
 
-              <!-- ─── TEXTAREA ─── -->
-              <textarea
-                v-else-if="isTextArea(key)"
-                class="form-control"
-                :id="key"
-                v-model="formData[key]"
-                :placeholder="formatLabel(key)"
-              ></textarea>
-
-              <!-- ─── SELECT ─── -->
-              <select
-                v-else-if="isSelect(key)"
-                class="form-control"
-                :id="key"
-                v-model="formData[key]"
+            <!-- ─── SELECT ─── -->
+            <select
+              v-else-if="isSelect(key)"
+              class="form-control"
+              :id="key"
+              v-model="formData[key]"
+            >
+              <option disabled value="">{{formatLabel(key) }}</option>
+              <option
+                v-for="option in getOptionsForKey(key)"
+                :key="option"
+                :value="option"
               >
-                <option disabled value="">{{formatLabel(key) }}</option>
-                <option
-                  v-for="option in getOptionsForKey(key)"
-                  :key="option"
-                  :value="option"
-                >
-                  {{ option }}
-                </option>
-              </select>
-            </div>
+                {{ option }}
+              </option>
+            </select>
           </div>
-        </form>
+        </div>
+      </form>
       </main>
       <footer class="Footer">
         <!-- place footer here -->
