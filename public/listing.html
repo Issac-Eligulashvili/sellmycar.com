@@ -43,14 +43,14 @@
         <p class="navText m-0">Hi {{data.username}}!</p>
       </header>
       <main id="form" class="form d-flex flex-column">
-        <p class="text-center mb-0 mt-2">Step {{step}} of 3</p>
+        <p class="text-center mb-0 mt-2">Step {{currentStep}} of 3</p>
         <hr />
-        <div class="d-flex justify-content-between align-items-center">
+        <div class="d-flex justify-content-between align-items-center" v-if="currentStep === 1">
           <div style="width: 32px"></div>
           <h3 class="header text-center m-0">Information Form</h3>
           <img style="width: 32px; padding: 4px" src="img/arrow_right.svg" />
           <form @submit.prevent="submitForm">
-    <div v-for="(value, key) in formData" :key="key" class="form-group">
+            <div v-for="(value, key) in formData" :key="key" class="form-group">
       <label :for="key">{{ formatLabel(key) }}</label>
 
       <!-- Input type logic -->
@@ -82,11 +82,14 @@
           {{ option }}
         </option>
       </select>
-    </div>
+            </div>
 
-    <button type="submit">Submit</button>
-  </form>
+            <button type="submit">Submit</button>
+          </form>
 
+        </div>
+        <div v-else-if="currentStep === 2">
+          <h1>TESTINGGGGGG</h1>
         </div>
       </main>
       <footer class="Footer">

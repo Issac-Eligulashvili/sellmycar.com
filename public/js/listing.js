@@ -16,13 +16,14 @@ const app = Vue.createApp({
                     ext_condition: '',
                     int_color: '',
                     ovr_condition: '',
-                    inAccident: null,
+                    in_Accident: null,
                     ownership: '',
                     payoff: '',
                     bank: '',
                     months: null,
                     additional_info: '',
                     owner_name:'',
+                    pictures: [],
                },
           }
      },
@@ -82,36 +83,83 @@ const app = Vue.createApp({
                };
                return states[state];
           },
-          incrementStep() {
-               this.step++;
+          formatLabel(key) {
+               return key
+               .replace(/_/g, ' ')
+               .replace(/\b\w/g, l => l.toUpperCase());
           },
-            formatLabel(key) {
-      return key
-        .replace(/_/g, ' ')
-        .replace(/\b\w/g, l => l.toUpperCase());
-    },
-    getInputType(value) {
-      if (typeof value === 'number') return 'number';
-      if (typeof value === 'boolean') return 'checkbox';
-      if (key === 'owner_email') return 'email';
-      return 'text';
-    },
-    isTextArea(key) {
-      return ['additional_info'].includes(key);
-    },
-    isSelect(key) {
-      return ['ext_condition', 'ovr_condition', 'int_color', 'ownership', 'inAccident'].includes(key);
-    },
-    getOptionsForKey(key) {
-      const options = {
-        ext_condition: ['Excellent', 'Good', 'Fair', 'Poor'],
-        ovr_condition: ['Excellent', 'Good', 'Fair', 'Poor'],
-        int_color: ['Black', 'Gray', 'Beige', 'Red', 'Other'],
-        ownership: ['Owned', 'Financed', 'Leased'],
-        inAccident: ['Yes', 'No'],
-      };
-      return options[key] || [];
-    },
+          getInputType(value) {
+               if (typeof value === 'number') return 'number';
+               if (typeof value === 'boolean') return 'checkbox';
+               if (key === 'owner_email') return 'email';
+               return 'text';
+          },
+          isTextArea(key) {
+               return ['additional_info'].includes(key);
+          },
+          isSelect(key) {
+               return ['ext_condition', 'ovr_condition', 'int_color', 'ownership', 'inAccident'].includes(key);
+          },
+          getOptionsForKey(key) {
+               const options = {
+               ext_condition: ['Excellent', 'Good', 'Fair', 'Poor'],
+               ovr_condition: ['Excellent', 'Good', 'Fair', 'Poor'],
+               int_color: ['Black', 'Gray', 'Beige', 'Red', 'Other'],
+               ownership: ['Owned', 'Financed', 'Leased'],
+               inAccident: ['Yes', 'No'],
+               };
+               return options[key] || [];
+          },
+          shouldShowField(key) {
+               const conditionalFields = ["payoff", "bank", "months"];
+               const showIfOwnedOrFinanced = ["Leased", "Financed"];
+               if (conditionalFields.includes(key)) {
+                    console.log("here");
+               return showIfOwnedOrFinanced.includes(this.formData.ownership);
+               }
+               return true;
+          },
+          validateForm() {
+               this.invalidFields = {}
+               let valid = true;
+               for (const key in this.formData) {
+               if (!this.shouldShowField(key)) continue;
+
+               const val = this.formData[key];
+               if (
+                    val === null ||
+                    val === undefined ||
+                    (typeof val === 'string' && val.trim() === '')
+               ) {
+                    this.invalidFields[key] = true;
+                    valid = false;
+               }
+               }
+
+               if (!valid) {
+                    alert('Please fill in all required fields.');
+               }
+               return valid;
+          },
+          goToNextStep() {
+               if (this.currentStep == 1) {
+                    if (this.validateForm()) {
+                    this.currentStep++;
+                    // optionally clear invalid fields for next step
+                    this.invalidFields = {};
+                    } else {
+                         alert('Please fill in all required fields.');
+                    }
+               }
+
+
+               this.currentStep++;
+          },
+          clearInvalid(key) {
+               if (this.invalidFields[key]) {
+                    this.$delete(this.invalidFields, key);
+               }
+          },
      },
      mounted() {
           const encoded = sessionStorage.getItem("user_data")
