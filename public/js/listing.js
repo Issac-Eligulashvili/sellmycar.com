@@ -2,7 +2,7 @@ const app = Vue.createApp({
      data() {
           return {
                data: {},
-               step: 1,
+               currentStep: 1,
                formData:{
                     make: '',
                     model: '',
@@ -25,6 +25,7 @@ const app = Vue.createApp({
                     owner_name:'',
                     pictures: [],
                },
+               invalidFields: {},
           }
      },
      methods: {
@@ -171,6 +172,11 @@ const app = Vue.createApp({
                } catch (err) {
                     console.error(err)
                }
+          }
+     },
+     watch: {
+          formData: function (newForm) {
+               console.log("changed");
           }
      },
 }).mount("#app")
