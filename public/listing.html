@@ -49,6 +49,44 @@
           <div style="width: 32px"></div>
           <h3 class="header text-center m-0">Information Form</h3>
           <img style="width: 32px; padding: 4px" src="img/arrow_right.svg" />
+          <form @submit.prevent="submitForm">
+    <div v-for="(value, key) in formData" :key="key" class="form-group">
+      <label :for="key">{{ formatLabel(key) }}</label>
+
+      <!-- Input type logic -->
+      <input
+        v-if="!isTextArea(key) && !isSelect(key)"
+        :type="getInputType(value)"
+        class="form-control"
+        :id="key"
+        v-model="formData[key]"
+        :placeholder="formatLabel(key)"
+      />
+
+      <textarea
+        v-else-if="isTextArea(key)"
+        class="form-control"
+        :id="key"
+        v-model="formData[key]"
+        :placeholder="formatLabel(key)"
+      ></textarea>
+
+      <select
+        v-else-if="isSelect(key)"
+        class="form-control"
+        :id="key"
+        v-model="formData[key]"
+      >
+        <option disabled value="">Please select</option>
+        <option v-for="option in getOptionsForKey(key)" :key="option" :value="option">
+          {{ option }}
+        </option>
+      </select>
+    </div>
+
+    <button type="submit">Submit</button>
+  </form>
+
         </div>
       </main>
       <footer class="Footer">
