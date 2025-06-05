@@ -84,7 +84,34 @@ const app = Vue.createApp({
           },
           incrementStep() {
                this.step++;
-          }
+          },
+            formatLabel(key) {
+      return key
+        .replace(/_/g, ' ')
+        .replace(/\b\w/g, l => l.toUpperCase());
+    },
+    getInputType(value) {
+      if (typeof value === 'number') return 'number';
+      if (typeof value === 'boolean') return 'checkbox';
+      if (key === 'owner_email') return 'email';
+      return 'text';
+    },
+    isTextArea(key) {
+      return ['additional_info'].includes(key);
+    },
+    isSelect(key) {
+      return ['ext_condition', 'ovr_condition', 'int_color', 'ownership', 'inAccident'].includes(key);
+    },
+    getOptionsForKey(key) {
+      const options = {
+        ext_condition: ['Excellent', 'Good', 'Fair', 'Poor'],
+        ovr_condition: ['Excellent', 'Good', 'Fair', 'Poor'],
+        int_color: ['Black', 'Gray', 'Beige', 'Red', 'Other'],
+        ownership: ['Owned', 'Financed', 'Leased'],
+        inAccident: ['Yes', 'No'],
+      };
+      return options[key] || [];
+    },
      },
      mounted() {
           const encoded = sessionStorage.getItem("user_data")
