@@ -48,7 +48,11 @@
         <div class="d-flex justify-content-between align-items-center">
           <div style="width: 32px"></div>
           <h3 class="header text-center m-0">Information Form</h3>
-          <img style="width: 32px; padding: 4px" src="img/arrow_right.svg" />
+          <img
+            style="width: 32px; padding: 4px"
+            src="img/arrow_right.svg"
+            @click="goToNextStep()"
+          />
         </div>
         <p class="my-1 text-center">
           Please provide the following information as accurately as possible

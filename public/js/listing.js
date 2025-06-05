@@ -145,7 +145,7 @@ const app = Vue.createApp({
                return valid;
           },
           goToNextStep() {
-               if (currentStep == 1) {
+               if (this.currentStep == 1) {
                     if (this.validateForm()) {
                     this.currentStep++;
                     // optionally clear invalid fields for next step
